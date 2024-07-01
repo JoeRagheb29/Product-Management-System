@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+body {
+    font-family: system-ui;
+    /* background-color: #000; */
+    background-image: url("Assets/beautiful-purple-forest-aesthetic-desktop-wallpaper-4k.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 735px;
+}
+
+.crud {
+    width: 65%;
+    margin: auto;
+    backdrop-filter: blur(1px);
+}
+
+.head {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 20px;
+    margin: 20px;
+}
+
+input {
+    background-color: #111;
+    border: none;
+    padding: 8px;
+    margin: 8px;
+    width: 100%;
+}
+
+.price input {
+    width: 20%;
+}
+
+input:focus {
+    background-color: #080808;
+    outline: none;
+    transform: scale(1.08);
+
+}
+
+small {
+    background-color: red;
+    align-self: center;
+    padding: 3px;
+}
+
+button {
+    background-color: #75006d;
+    padding: 5px;
+    margin: 5px;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.input button:hover , #deleteAll:hover {
+    transform: scale(1.01);
+    background-color: #ab1aa1;
+    letter-spacing: 1px;
+    transition: .5s;
+}
+
+.output button:hover {
+    background-color: #ab1aa1;
+}
+
+.search {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search button {
+    width: 45%;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+}
+
+table thead {
+    text-transform: uppercase;
+}
