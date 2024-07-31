@@ -4,49 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="cruds.css">
+    <link rel="stylesheet" href="../../FrameWorks and Tools/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../FrameWorks and Tools/fontawesome-free-6.5.2-web/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <title>cruds</title>
 </head>
 <body>
-    <div class="crud">
-        <div class="head">
-            <h2>cruds</h2>
+    <nav>
+        <div class="title">
+            <h2>cruds project</h2>
             <p>product management system</p>
         </div>
-        <div class="input">
-            <input type="text" id="title" placeholder="title">
-            <div class="price" style="display: flex;">
-                <input onkeyup="getTotal()" type="number" id="price" placeholder="price">
-                <input onkeyup="getTotal()" type="number" id="taxes" placeholder="taxes">
-                <input onkeyup="getTotal()" type="number" id="ads" placeholder="ads">
-                <input onkeyup="getTotal()" type="number" id="discount" placeholder="discount">
-                <small id="total">Total: <span id="totalNum"></span></small>
-            </div>
-            <input type="number" id="count" placeholder="count">
-            <input type="text" id="catagory" placeholder="catagory">
-            <button id="create">Create</button>
+        <div class="search">
             <input onkeyup="searchData()" type="text" id="search" placeholder="search">
-            <div class="search">
-                <button onclick="chooseMode(this.id)" id="sTitle">Search By Title</button>
-                <button onclick="chooseMode(this.id)" id="sCatagory">Search By Catagory</button>
+            <button onclick="chooseMode(this.id)" id="sTitle">Search By Title</button>
+            <button onclick="chooseMode(this.id)" id="sCatagory">Search By Catagory</button>
+            <button onclick="toggleMode()" id="toggleModeBtn">
+                <i class="fa-solid fa-circle-half-stroke"></i>
+            </button>
+        </div>
+    </nav>
+    <div class="crud">
+        <div class="Create">
+            <h1>Create New Product</h1>
+            <div class="form">
+                <input type="text" id="title" placeholder="title">
+                <div id="divPrice"><input onkeyup="getTotal()" type="number" id="price" placeholder="price">
+                <small id="total">Total: <span id="totalNum"></span></small></div>
+                <input onkeyup="getTotal()" type="number" id="taxes" placeholder="taxes as percent %">
+                <input onkeyup="getTotal()" type="number" id="ads" placeholder="ads as percent %">
+                <input onkeyup="getTotal()" type="number" id="discount" placeholder="discount as percent %">
+                <input type="number" id="count" placeholder="count">
+                <input type="text" id="catagory" placeholder="catagory">
+                <button id="create">Create</button>
+                <div id="divDeleteAll" style="margin-bottom: 2vh;"></div>
             </div>
         </div>
-        <div id="divDeleteAll"></div>
-        <p id="pWarn"></p>
+        <div id="leftSide"></div>
         <div class="output">
-            <table>
+            <table class="table">
                 <thead>
-                    <th>id</th>
-                    <th>title</th>
-                    <th>price</th>
-                    <th>taxes</th>
-                    <th>ads</th>
-                    <th>discount</th>
-                    <th>total</th>
-                    <th>category</th>
-                    <th>update</th>
-                    <th>delete</th>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">title</th>
+                        <th scope="col">price</th>
+                        <th scope="col">taxes%</th>
+                        <th scope="col">ads%</th>
+                        <th scope="col">discount%</th>
+                        <th scope="col">total</th>
+                        <th scope="col">category</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">update</th>
+                        <th scope="col">delete</th>
+                    </tr>
                 </thead>
-                <tbody id="table">
+                <tbody class="table-group-divider">
                 </tbody>
             </table>
         </div>

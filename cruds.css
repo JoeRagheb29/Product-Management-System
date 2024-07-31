@@ -1,92 +1,143 @@
-* {
-    margin: 0;
-    padding: 0;
-    color: #fff;
-}
-
-body {
-    font-family: system-ui;
-    /* background-color: #000; */
-    background-image: url("Assets/beautiful-purple-forest-aesthetic-desktop-wallpaper-4k.jpg");
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
-    height: 735px;
-}
-
 .crud {
-    width: 65%;
+    display: flex;
+    width: 95%;
     margin: auto;
-    backdrop-filter: blur(1px);
+    height: 100vh;
 }
 
-.head {
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 20px;
-    margin: 20px;
+@media (min-width : 928px) {
+    .Create {
+        font-size: 15px;
+        width: 35vw;
+        margin: 0 3vw;
+        position: fixed;
+        top: 25vh;
+        left: 0;
+    }    
+    .Create h1 {
+        font-size: 35px;
+    }
+    #leftSide {
+        width: 46%;
+    }
+    .output {
+        margin-left: 9vw;
+    }
 }
 
-input {
-    background-color: #111;
+@media (max-width : 928px) {
+    .crud {
+        flex-wrap: wrap;
+    } 
+    .Create {
+        width: 100%;
+        margin-top: 25vh;
+        position: static;
+    }
+    .Create input {
+        width: 100%;
+    }
+    .output {
+        width: 100%;
+    }
+}
+
+@media (max-width : 806px) {
+    .search {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+nav {
+    background-color: #eee;
+    display: flex;
+    justify-content: space-between;
+    padding: 5vh 5vw 5vh 3vw;
+    position: fixed;
+    width: -webkit-fill-available;
+    top: 0;
+}
+
+.search input {
     border: none;
-    padding: 8px;
-    margin: 8px;
-    width: 100%;
-}
-
-.price input {
-    width: 20%;
-}
-
-input:focus {
-    background-color: #080808;
-    outline: none;
-    transform: scale(1.08);
-
-}
-
-small {
-    background-color: red;
-    align-self: center;
-    padding: 3px;
 }
 
 button {
-    background-color: #75006d;
-    padding: 5px;
-    margin: 5px;
-    border: none;
-    border-radius: 15px;
-    width: 100%;
-    cursor: pointer;
+    border-color: rgb(0 0 0 / 21%);
+    border-radius: 5px;
+    /* background-color: #ddd; */
+    background-color:#8488ff;
 }
 
-.input button:hover , #deleteAll:hover {
-    transform: scale(1.01);
-    background-color: #ab1aa1;
-    letter-spacing: 1px;
-    transition: .5s;
+.title {
+    text-transform: uppercase;
 }
 
-.output button:hover {
-    background-color: #ab1aa1;
+nav .search .i {
+    display: inline-block;
+    background-color: beige;
+    font-size: 16px;
+    border-radius: 5px;
 }
 
-.search {
+.Create {
+    background-color: #eee;
     display: flex;
-    justify-content: space-between;
-}
-
-.search button {
-    width: 45%;
-}
-
-table {
-    width: 100%;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
 }
 
-table thead {
+.Create h1 {
+    padding-top: 2vh;
+    /* font-family: "Montserrat", sans-serif;
+    font-weight: 333; */
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 400;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Create .form input {
+    border: none;
+    margin: 1vh 0;
+    width: 80%;
+}
+
+input:focus {
+    background-color: #eee;
+    outline: none;
+    transform: scale(1.08);
+}
+
+#divPrice {
+    min-width: 90%;
+    max-width: 90%;
+}
+
+.output {
+    margin-top: 25vh;
+}
+
+.table {
+    background-color: #eee;
+    text-align: center;
+}
+
+.table thead {
     text-transform: uppercase;
+}
+
+#deleteAll {
+    margin-top: 2vh;
+}
+
+button:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
 }

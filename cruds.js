@@ -8,7 +8,7 @@ let total = document.getElementById("total");
 let totalNum = document.getElementById("totalNum");
 let count = document.getElementById("count");
 let catagory = document.getElementById("catagory");
-let tBody = document.getElementById("table");
+let tBody = document.getElementsByClassName("table-group-divider")[0];
 let divDeleteAll = document.querySelector("#divDeleteAll");
 let btnDeleteAll;
 let mode = "create";
@@ -16,7 +16,12 @@ let create = document.getElementById("create");
 let searchMode = "title";
 let search = document.getElementById("search");
 let tmpIndex;
-let p = document.getElementById("pWarn");
+let toggleModeBtn = document.getElementById("toggleModeBtn");
+let nav = document.getElementsByTagName("nav")[0];
+let divCreate = document.getElementsByClassName("Create")[0];
+let buttons = document.querySelectorAll("button");
+let inputs = document.querySelectorAll("input");
+let Theads , Tdata;
 
 // Code that build the main array.
 let projectArr;
@@ -33,7 +38,7 @@ function getTotal() {
         totalNum.innerText = null;
     } else {
         total.style.backgroundColor = "green";
-        totalNum.innerText = +price.value + +taxes.value + +ads.value - +discount.value;
+        totalNum.innerText = +price.value + (+taxes.value/100)*price.value + (+ads.value/100)*price.value - (+discount.value/100)*price.value;
     }
     if (totalNum.innerText <= 0) {
         total.style.backgroundColor = "red";
@@ -58,7 +63,7 @@ function showData() {
     let table = "";
     for (let i = 0; i < projectArr.length; i++) {
         table += `<tr>
-        <td>${i + 1}</td> 
+        <th scope="row">${i+1}</th>
         <td>${projectArr[i].title}</td>
         <td>${projectArr[i].price}</td>
         <td>${projectArr[i].taxes}</td>
@@ -66,13 +71,14 @@ function showData() {
         <td>${projectArr[i].discount}</td>
         <td>${projectArr[i].total}</td>
         <td>${projectArr[i].catagory}</td>
+        <td>${projectArr[i].date}</td>
         <td><button onclick="updateData(${i})" id="update">update</button></td>
         <td><button onclick="deleteData(${i})" id="delete">delete</button></td>
         </tr>`;
     }
     tBody.innerHTML = table;
     if (projectArr.length > 0) {
-        divDeleteAll.innerHTML = `<button onclick="warning()" ondblclick="deleteAll()" id="deleteAll">Delete All (${projectArr.length})</button>`;
+        divDeleteAll.innerHTML = `<button onclick="warning()" id="deleteAll">Delete All (${projectArr.length})</button>`;
         btnDeleteAll = document.querySelector("#deleteAll");
     } else {
         divDeleteAll.innerHTML = ``;
@@ -81,6 +87,11 @@ function showData() {
 
 //function that create new product or update exist product.
 create.onclick = function createPro() {
+    let thisDate = new Date();
+    console.log(thisDate);
+    console.log(JSON.stringify(thisDate));
+    let date = JSON.stringify(thisDate).substring(0,11) + '\"';
+    console.log(date);
     if (title.value != '' && price.value != '' && catagory.value != '')
     {
         let dataProduct = {
@@ -92,6 +103,7 @@ create.onclick = function createPro() {
             total: totalNum.innerHTML,
             count: count.value,
             catagory: catagory.value.toLowerCase(),
+            date: JSON.parse(date),
         }
         function countData() {
             //fuction that create the items accroding their inputted count.
@@ -107,6 +119,8 @@ create.onclick = function createPro() {
                         clearData();
                     }
                 }
+                // timeout 34an ykon l72 3ml show data
+                setTimeout(()=>{window.scrollTo(0, document.body.scrollHeight)},50)
             }
             //function that show the updated item
             else if (mode === "update") {
@@ -114,14 +128,16 @@ create.onclick = function createPro() {
                 localStorage.setItem("product", JSON.stringify(projectArr));
                 mode = "create";
                 create.innerText = "create";
+                document.querySelector(".Create h1").innerHTML = "Create New Product";
                 count.style.display = "block";
                 clearData();
             }
         }
         countData();
         showData();
+        certainMode();
     }
-    else 
+    else
     {
         if(mode === "create") 
         {
@@ -129,6 +145,8 @@ create.onclick = function createPro() {
                 window.alert("Please Enter The Title");
             else if(price.value == '')
                 window.alert("Please Enter The Price");
+            else if(count.value = '') 
+                window.alert("Please Enter the Count");
             else if(catagory.value == '')
                 window.alert("Please Enter The Category");   
         }
@@ -136,33 +154,32 @@ create.onclick = function createPro() {
 }
 
 showData();
+certainMode();
 
 // function that delete any individual object you click delete on it.
 function deleteData(index) {
     projectArr.splice(index, 1);
     localStorage.setItem("product", JSON.stringify(projectArr));
     showData();
+    certainMode();
 }
 
-// function that warn the user if once click deleteAll.
+// function that warn the user if need already deleteAll.
 function warning() {
-    p.innerHTML = " you will lost all data?! <br>..if you sure double click on it";
-    p.style.textAlign = "center";
-    p.style.color = "red" ;
-}
-
-// function that delete the whole data in the project when the user double click.
-function deleteAll() {
-    p.innerHTML = '';
-    projectArr.splice(0);
-    localStorage.clear();
-    showData();
+    let respose = window.confirm(`you will lost all data! Are you sure?`);
+    if(respose) {
+        projectArr.splice(0);
+        localStorage.clear();
+        showData();
+        certainMode();
+    }
 }
 
 // function that update information any object you click update on it.
 function updateData(index) {
     mode = "update";
     create.innerText = "Update";
+    document.querySelector(".Create h1").innerHTML = "Update Product " + (index+1);
     title.value = projectArr[index].title;
     price.value = projectArr[index].price;
     taxes.value = projectArr[index].taxes;
@@ -171,7 +188,7 @@ function updateData(index) {
     getTotal();
     count.style.display = "none";
     catagory.value = projectArr[index].catagory;
-    scroll({top:0 , behavior:'smooth'})
+    // scroll({top:0 , behavior:'smooth'})
     tmpIndex = index;
 }
 
@@ -187,6 +204,7 @@ function chooseMode(index) {
     search.placeholder = "Search by " + searchMode;
     search.value = "";
     showData();
+    certainMode();
 }
 
 // function that search about specific product at the website.
@@ -203,12 +221,73 @@ function searchData() {
             <td>${projectArr[i].discount}</td>
             <td>${projectArr[i].total}</td>
             <td>${projectArr[i].catagory}</td>
+            <td>${projectArr[i].date}</td>
             <td><button onclick="updateData(${i})" id="update">update</button></td>
             <td><button onclick="deleteData(${i})" id="delete">delete</button></td>
             </tr>`;
         }
     }
     tBody.innerHTML = table;
+    certainMode();
+}
+
+// function that toggle from and to dark and light modes.
+function toggleMode() {
+    if(toggleModeBtn.classList.contains("active")) {
+        toggleModeBtn.classList.remove("active");
+    } else {
+        toggleModeBtn.classList.add("active");
+    }
+    certainMode();
+}
+
+// function that design the dark mode.
+function certainMode() {
+    Tdata = document.querySelectorAll(".output .table td");
+    Theads = document.querySelectorAll(".output .table th");
+    buttons = document.querySelectorAll("button")
+
+    if(toggleModeBtn.classList.contains("active")) {
+        document.body.style.color = "#fff";
+        document.body.style.backgroundColor = "#000";
+        nav.style.backgroundColor = "#222";
+        divCreate.style.backgroundColor = "#222";
+        Theads.forEach((Thead)=>{
+            Thead.style.color = "#ddd";
+            Thead.style.backgroundColor = "#222";
+        })
+        Tdata.forEach((Tdatium)=>{
+            Tdatium.style.color = "#ddd";
+            Tdatium.style.backgroundColor = "#222";
+        })
+        inputs.forEach((input)=>{
+            input.style.backgroundColor = "#ddd";
+        })
+        buttons.forEach((button)=>{
+            button.style.backgroundColor = "#4a4c90";
+            button.style.color = "#fff";
+        })
+    } else {
+        document.body.style.color = "#000";
+        document.body.style.backgroundColor = "#fff";
+        nav.style.backgroundColor = "#eee";
+        divCreate.style.backgroundColor = "#eee";
+        Theads.forEach((Thead)=>{
+            Thead.style.color = "#000";
+            Thead.style.backgroundColor = "#eee";
+        })
+        Tdata.forEach((Tdatium)=>{
+            Tdatium.style.color = "#000";
+            Tdatium.style.backgroundColor = "#eee";
+        })
+        inputs.forEach((input)=>{
+            input.style.backgroundColor = "#fff";
+        })
+        buttons.forEach((button)=>{
+            button.style.backgroundColor = "#8488ff";
+            button.style.color = "#000";
+        })
+    }
 }
 
 // congratulations your project has been completed :)))))))
