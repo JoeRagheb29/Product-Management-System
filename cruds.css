@@ -3,8 +3,10 @@
     width: 95%;
     margin: auto;
     height: 100vh;
+    /* max-width: 100%; */
 }
 
+/* Labtob mode */
 @media (min-width : 928px) {
     .Create {
         font-size: 15px;
@@ -25,7 +27,8 @@
     }
 }
 
-@media (max-width : 928px) {
+/* phone and Ipad mode */
+@media (max-width : 1340px) {
     .crud {
         flex-wrap: wrap;
     } 
@@ -39,9 +42,12 @@
     }
     .output {
         width: 100%;
+        margin: auto;
     }
 }
 
+
+/* phone mode */
 @media (max-width : 806px) {
     .search {
         display: flex;
@@ -65,8 +71,6 @@ nav {
 
 button {
     border-color: rgb(0 0 0 / 21%);
-    border-radius: 5px;
-    /* background-color: #ddd; */
     background-color:#8488ff;
 }
 
@@ -91,8 +95,6 @@ nav .search .i {
 
 .Create h1 {
     padding-top: 2vh;
-    /* font-family: "Montserrat", sans-serif;
-    font-weight: 333; */
     font-family: "Noto Sans", sans-serif;
     font-weight: 400;
 }
@@ -140,4 +142,12 @@ input:focus {
 button:hover {
     transform: scale(1.1);
     transition: 0.3s;
+}
+
+#delete {
+    background-color: red;
+}
+
+#update {
+    background-color: #007bff;
 }

@@ -76,6 +76,7 @@ function showData() {
         <td><button onclick="deleteData(${i})" id="delete">delete</button></td>
         </tr>`;
     }
+    //  style="background-color:red"
     tBody.innerHTML = table;
     if (projectArr.length > 0) {
         divDeleteAll.innerHTML = `<button onclick="warning()" id="deleteAll">Delete All (${projectArr.length})</button>`;
@@ -88,10 +89,7 @@ function showData() {
 //function that create new product or update exist product.
 create.onclick = function createPro() {
     let thisDate = new Date();
-    console.log(thisDate);
-    console.log(JSON.stringify(thisDate));
     let date = JSON.stringify(thisDate).substring(0,11) + '\"';
-    console.log(date);
     if (title.value != '' && price.value != '' && catagory.value != '')
     {
         let dataProduct = {
@@ -264,7 +262,6 @@ function certainMode() {
             input.style.backgroundColor = "#ddd";
         })
         buttons.forEach((button)=>{
-            button.style.backgroundColor = "#4a4c90";
             button.style.color = "#fff";
         })
     } else {
@@ -284,7 +281,6 @@ function certainMode() {
             input.style.backgroundColor = "#fff";
         })
         buttons.forEach((button)=>{
-            button.style.backgroundColor = "#8488ff";
             button.style.color = "#000";
         })
     }
