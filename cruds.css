@@ -1,58 +1,5 @@
-.crud {
-    display: flex;
-    width: 95%;
-    margin: auto;
-    height: 100vh;
-    /* max-width: 100%; */
-}
-
-/* Labtob mode */
-@media (min-width : 928px) {
-    .Create {
-        font-size: 15px;
-        width: 35vw;
-        margin: 0 3vw;
-        position: fixed;
-        top: 25vh;
-        left: 0;
-    }    
-    .Create h1 {
-        font-size: 35px;
-    }
-    #leftSide {
-        width: 46%;
-    }
-    .output {
-        margin-left: 9vw;
-    }
-}
-
-/* phone and Ipad mode */
-@media (max-width : 1340px) {
-    .crud {
-        flex-wrap: wrap;
-    } 
-    .Create {
-        width: 100%;
-        margin-top: 25vh;
-        position: static;
-    }
-    .Create input {
-        width: 100%;
-    }
-    .output {
-        width: 100%;
-        margin: auto;
-    }
-}
-
-
-/* phone mode */
-@media (max-width : 806px) {
-    .search {
-        display: flex;
-        flex-direction: column;
-    }
+.title {
+    text-transform: uppercase;
 }
 
 nav {
@@ -64,25 +11,23 @@ nav {
     width: -webkit-fill-available;
     top: 0;
 }
-
-.search input {
+nav .search input {
     border: none;
+}
+nav .search .i {
+    display: inline-block;
+    background-color: beige;
+    font-size: 16px;
+    border-radius: 5px;
 }
 
 button {
     border-color: rgb(0 0 0 / 21%);
     background-color:#8488ff;
 }
-
-.title {
-    text-transform: uppercase;
-}
-
-nav .search .i {
-    display: inline-block;
-    background-color: beige;
-    font-size: 16px;
-    border-radius: 5px;
+button:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
 }
 
 .Create {
@@ -92,38 +37,39 @@ nav .search .i {
     justify-content: center;
     text-align: center;
 }
-
 .Create h1 {
     padding-top: 2vh;
     font-family: "Noto Sans", sans-serif;
     font-weight: 400;
 }
-
-.form {
+.Create .form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .Create .form input {
     border: none;
     margin: 1vh 0;
     width: 80%;
 }
-
-input:focus {
-    background-color: #eee;
-    outline: none;
-    transform: scale(1.08);
+.Create #create {
+    background-color:#007bff;
+}
+.Create #deleteAll {
+    background-color: rgb(255, 100, 100);
 }
 
 #divPrice {
     min-width: 90%;
     max-width: 90%;
 }
-
-.output {
-    margin-top: 25vh;
+input:focus {
+    background-color: #eee;
+    outline: none;
+    transform: scale(1.08);
+}
+#deleteAll {
+    margin-top: 2vh;
 }
 
 .table {
@@ -135,19 +81,55 @@ input:focus {
     text-transform: uppercase;
 }
 
-#deleteAll {
-    margin-top: 2vh;
-}
-
-button:hover {
-    transform: scale(1.1);
-    transition: 0.3s;
-}
-
 #delete {
-    background-color: red;
+    background-color: rgb(255, 100, 100);
 }
 
 #update {
     background-color: #007bff;
+}
+
+/* Labtob and Ipad mode ( > 928px) */
+@media (min-width : 928px) {
+    .crud {
+        width: 95%;
+        margin: auto;
+        height: 100vh;
+    }
+    .Create {
+        font-size: 15px;
+        width: 35vw;
+        margin: 0 3vw;
+        position: fixed;
+        top: 25vh;
+        left: 0;
+    }    
+    .Create h1 {
+        font-size: 35px;
+        padding: 15px 40px 0 40px;
+    }
+    .output {
+        position: absolute;
+        height: 70vh;
+        width: 58vw;
+        top: 25vh;
+        right: 2vw;
+        overflow: scroll;
+    }
+}
+
+/* phone mode ( < 927px) */
+@media (max-width : 927px) {
+    .search {
+        display: flex;
+        flex-direction: column;
+    }
+    .Create {
+        /* margin-top: 25vh; */
+        margin: 30vh 0 5vh 0;
+        position: static;
+    }
+    .output {
+        overflow-x: scroll;
+    }
 }
