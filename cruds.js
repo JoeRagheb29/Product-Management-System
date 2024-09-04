@@ -250,6 +250,7 @@ function certainMode() {
         document.body.style.backgroundColor = "#000";
         nav.style.backgroundColor = "#222";
         divCreate.style.backgroundColor = "#222";
+        document.getElementsByClassName("output")[0].style.scrollbarColor = "#777 #111";
         Theads.forEach((Thead)=>{
             Thead.style.color = "#ddd";
             Thead.style.backgroundColor = "#222";
@@ -269,6 +270,7 @@ function certainMode() {
         document.body.style.backgroundColor = "#fff";
         nav.style.backgroundColor = "#eee";
         divCreate.style.backgroundColor = "#eee";
+        document.getElementsByClassName("output")[0].style.scrollbarColor = "#999 #fff";
         Theads.forEach((Thead)=>{
             Thead.style.color = "#000";
             Thead.style.backgroundColor = "#eee";
